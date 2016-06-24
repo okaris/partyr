@@ -14,6 +14,9 @@
 		A622144A1D1D789100EA672E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62214491D1D789100EA672E /* Assets.xcassets */; };
 		A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A622144B1D1D789100EA672E /* LaunchScreen.storyboard */; };
 		A6AB50971D1D7973003B8665 /* OKServices.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50961D1D7973003B8665 /* OKServices.m */; };
+		A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */; };
+		A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */; };
+		A6AB50A01D1D7C9A003B8665 /* OKJSONErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */; };
 		F7113E243645A4FB2AC5C495 /* libPods-partyr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76887681A742F6B24DE9C2C2 /* libPods-partyr.a */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +35,12 @@
 		A622144E1D1D789100EA672E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6AB50951D1D7973003B8665 /* OKServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKServices.h; sourceTree = "<group>"; };
 		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKServices.m; sourceTree = "<group>"; };
+		A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONRequestModel.h; sourceTree = "<group>"; };
+		A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONRequestModel.m; sourceTree = "<group>"; };
+		A6AB509B1D1D7C78003B8665 /* OKJSONResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONResponseModel.h; sourceTree = "<group>"; };
+		A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONResponseModel.m; sourceTree = "<group>"; };
+		A6AB509E1D1D7C9A003B8665 /* OKJSONErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONErrorModel.h; sourceTree = "<group>"; };
+		A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONErrorModel.m; sourceTree = "<group>"; };
 		C76C89C21B0113AE335CDDFD /* Pods-partyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-partyr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-partyr/Pods-partyr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +83,12 @@
 				A62214441D1D789100EA672E /* ViewController.m */,
 				A6AB50951D1D7973003B8665 /* OKServices.h */,
 				A6AB50961D1D7973003B8665 /* OKServices.m */,
+				A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */,
+				A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */,
+				A6AB509B1D1D7C78003B8665 /* OKJSONResponseModel.h */,
+				A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */,
+				A6AB509E1D1D7C9A003B8665 /* OKJSONErrorModel.h */,
+				A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */,
 				A62214461D1D789100EA672E /* Main.storyboard */,
 				A62214491D1D789100EA672E /* Assets.xcassets */,
 				A622144B1D1D789100EA672E /* LaunchScreen.storyboard */,
@@ -229,10 +244,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */,
 				A62214451D1D789100EA672E /* ViewController.m in Sources */,
 				A6AB50971D1D7973003B8665 /* OKServices.m in Sources */,
 				A62214421D1D789100EA672E /* AppDelegate.m in Sources */,
+				A6AB50A01D1D7C9A003B8665 /* OKJSONErrorModel.m in Sources */,
 				A622143F1D1D789000EA672E /* main.m in Sources */,
+				A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

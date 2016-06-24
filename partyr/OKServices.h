@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "JSONModel.h"
+#import "OKJSONRequestModel.h"
+#import "OKJSONResponseModel.h"
+#import "OKJSONErrorModel.h"
 
 @interface OKServices : NSObject
 
@@ -19,9 +22,9 @@
 -(void) initServicesWithBlock:(void (^)()) completion;
 
 -(AFHTTPRequestOperation*) postRequestWithUrl:(NSString*) url
-                                      request:(OKJSONRequest*) request
-                                    onSuccess:(void(^)(OKJSONResponse*)) successBlock
-                                    onFailure:(void(^)(OKJSONError*)) errorBlock
+                                      request:(OKJSONRequestModel*) request
+                                    onSuccess:(void(^)(OKJSONResponseModel*)) successBlock
+                                    onFailure:(void(^)(OKJSONErrorModel*)) errorBlock
                                 responseClass:(Class) responseClass;
 
 @end
