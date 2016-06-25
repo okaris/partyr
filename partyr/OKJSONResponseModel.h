@@ -10,6 +10,6 @@
 
 @interface OKJSONResponseModel : JSONModel
 @property (strong, nonatomic) NSString *stat;
-@property (assign, nonatomic) int code;
-@property (strong, nonatomic) NSString *message;
+@property (assign, nonatomic) NSNumber<Optional> *code;
+@property (strong, nonatomic) NSString<Optional> *message;
 @end

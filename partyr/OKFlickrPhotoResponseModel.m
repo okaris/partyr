@@ -1,16 +1,13 @@
 //
-//  ViewController.h
+//  OKFlickrPhotoResponseModel.m
 //  partyr
 //
 //  Created by Omer Karisman on 24/06/16.
 //  Copyright © 2016 Okaris. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "OKServices.h"
+#import "OKFlickrPhotoResponseModel.h"
 
-@interface ViewController : UIViewController
-
+@implementation OKFlickrPhotoResponseModel
 
 @end
-

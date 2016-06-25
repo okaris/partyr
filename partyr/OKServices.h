@@ -13,13 +13,15 @@
 #import "OKJSONResponseModel.h"
 #import "OKJSONErrorModel.h"
 
+#define FlickrRestAPIUrl @"https://api.flickr.com/services/rest/"
+#define PhotoSearchEndpoint @"flickr.photos.search"
+
 @interface OKServices : NSObject
 
 @property (strong, nonatomic) AFHTTPRequestOperationManager* httpRequestOperationManager;
 @property (strong, nonatomic) NSString* tokenCode;
 
 +(instancetype) sharedInstance;
--(void) initServicesWithBlock:(void (^)()) completion;
 
 -(AFHTTPRequestOperation*) postRequestWithUrl:(NSString*) url
                                       request:(OKJSONRequestModel*) request

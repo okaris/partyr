@@ -29,19 +29,16 @@
     if ( (self = [super init]) )
     {
         httpRequestOperationManager = [[AFHTTPRequestOperationManager alloc]initWithBaseURL:nil];
-        httpRequestOperationManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        httpRequestOperationManager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+
         httpRequestOperationManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [httpRequestOperationManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [httpRequestOperationManager.requestSerializer setValue:@"UTF-8" forHTTPHeaderField:@"Accept-Encoding"];
+
         httpRequestOperationManager.operationQueue.maxConcurrentOperationCount = 1;
         
     }
     return self;
-}
-
-
--(void) initServicesWithBlock:(void (^)()) completion{
-    
-    
-    
 }
 
 -(AFHTTPRequestOperation*)postRequestWithUrl:(NSString *)url request:(OKJSONRequestModel *)request onSuccess:(void (^)(OKJSONResponseModel *))successBlock onFailure:(void (^)(OKJSONErrorModel *))errorBlock responseClass:(Class)responseClass
@@ -50,37 +47,37 @@
         request.format = @"json";
     }
     
-    return [httpRequestOperationManager POST:url parameters:[request toDictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if (!request.api_key) {
+        request.api_key = @"46383d223578cb195eb6f5e257affb6b";
+    }
+    
+    request.nojsoncallback = 1;
+    
+    NSLog(@"Request: %@", request.toJSONString);
+    return [httpRequestOperationManager GET:url parameters:[request toDictionary] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if (responseObject)
         {
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject
-                                                               options:NSJSONWritingPrettyPrinted
-                                                                 error:nil];
-            NSString* prettyJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-            
-            prettyJson = [prettyJson stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
-            
             
             JSONModelError* error;
             
             OKJSONResponseModel* response = [[responseClass alloc] initWithString:operation.responseString error:&error];
             
+//            NSLog(@"Response: %@",[response toJSONString]);
+            
             if (error) {
                 
                 OKJSONErrorModel* baseError = [OKJSONErrorModel new];
-                baseError.message = @"Generic Error";
-                baseError.code = -1;
+                baseError.message = error.description.localizedCapitalizedString;
+                baseError.code = error.code;
                 if(errorBlock){
                     errorBlock(baseError);
                 }
-                
-                
             }else{
                 
                 
-                if ([response.stat isEqualToString:@"OK"]) {
+                if ([response.stat isEqualToString:@"ok"]) {
                     if(successBlock){
                         successBlock(response);
                     }
@@ -88,7 +85,7 @@
                     OKJSONErrorModel* baseError = [OKJSONErrorModel new];
                     baseError.message = response.message;
                     baseError.stat = response.stat;
-                    baseError.code = response.code;
+                    baseError.code = [response.code integerValue];
                     if(errorBlock){
                         errorBlock(baseError);
                     }
@@ -111,7 +108,7 @@
                 baseError.message = @"No Internet Connection";
                 baseError.code = NSURLErrorNotConnectedToInternet;
             }else{
-                baseError.message = @"Generic Error";
+                baseError.message = error.description.localizedCapitalizedString;
                 baseError.code = (int)error.code;
             }
             

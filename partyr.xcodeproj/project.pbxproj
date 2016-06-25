@@ -17,6 +17,11 @@
 		A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */; };
 		A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */; };
 		A6AB50A01D1D7C9A003B8665 /* OKJSONErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */; };
+		A6AB50A31D1D8461003B8665 /* OKFlickrPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50A21D1D8461003B8665 /* OKFlickrPhotoModel.m */; };
+		A6AB50A61D1D87B8003B8665 /* OKFlickrPhotosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50A51D1D87B8003B8665 /* OKFlickrPhotosModel.m */; };
+		A6AB50A91D1D8860003B8665 /* OKFlickrPhotoResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */; };
+		A6AB50AC1D1E90AF003B8665 /* OKData.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50AB1D1E90AF003B8665 /* OKData.m */; };
+		A6AB50AF1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50AE1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m */; };
 		F7113E243645A4FB2AC5C495 /* libPods-partyr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76887681A742F6B24DE9C2C2 /* libPods-partyr.a */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +46,16 @@
 		A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONResponseModel.m; sourceTree = "<group>"; };
 		A6AB509E1D1D7C9A003B8665 /* OKJSONErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONErrorModel.h; sourceTree = "<group>"; };
 		A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONErrorModel.m; sourceTree = "<group>"; };
+		A6AB50A11D1D8461003B8665 /* OKFlickrPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoModel.h; sourceTree = "<group>"; };
+		A6AB50A21D1D8461003B8665 /* OKFlickrPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoModel.m; sourceTree = "<group>"; };
+		A6AB50A41D1D87B8003B8665 /* OKFlickrPhotosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotosModel.h; sourceTree = "<group>"; };
+		A6AB50A51D1D87B8003B8665 /* OKFlickrPhotosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotosModel.m; sourceTree = "<group>"; };
+		A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoResponseModel.h; sourceTree = "<group>"; };
+		A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoResponseModel.m; sourceTree = "<group>"; };
+		A6AB50AA1D1E90AE003B8665 /* OKData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKData.h; sourceTree = "<group>"; };
+		A6AB50AB1D1E90AF003B8665 /* OKData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKData.m; sourceTree = "<group>"; };
+		A6AB50AD1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoRequestModel.h; sourceTree = "<group>"; };
+		A6AB50AE1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoRequestModel.m; sourceTree = "<group>"; };
 		C76C89C21B0113AE335CDDFD /* Pods-partyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-partyr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-partyr/Pods-partyr.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,14 +96,24 @@
 				A62214411D1D789100EA672E /* AppDelegate.m */,
 				A62214431D1D789100EA672E /* ViewController.h */,
 				A62214441D1D789100EA672E /* ViewController.m */,
+				A6AB50AA1D1E90AE003B8665 /* OKData.h */,
+				A6AB50AB1D1E90AF003B8665 /* OKData.m */,
 				A6AB50951D1D7973003B8665 /* OKServices.h */,
 				A6AB50961D1D7973003B8665 /* OKServices.m */,
 				A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */,
 				A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */,
+				A6AB50AD1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.h */,
+				A6AB50AE1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m */,
 				A6AB509B1D1D7C78003B8665 /* OKJSONResponseModel.h */,
 				A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */,
 				A6AB509E1D1D7C9A003B8665 /* OKJSONErrorModel.h */,
 				A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */,
+				A6AB50A11D1D8461003B8665 /* OKFlickrPhotoModel.h */,
+				A6AB50A21D1D8461003B8665 /* OKFlickrPhotoModel.m */,
+				A6AB50A41D1D87B8003B8665 /* OKFlickrPhotosModel.h */,
+				A6AB50A51D1D87B8003B8665 /* OKFlickrPhotosModel.m */,
+				A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */,
+				A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */,
 				A62214461D1D789100EA672E /* Main.storyboard */,
 				A62214491D1D789100EA672E /* Assets.xcassets */,
 				A622144B1D1D789100EA672E /* LaunchScreen.storyboard */,
@@ -250,7 +275,12 @@
 				A62214421D1D789100EA672E /* AppDelegate.m in Sources */,
 				A6AB50A01D1D7C9A003B8665 /* OKJSONErrorModel.m in Sources */,
 				A622143F1D1D789000EA672E /* main.m in Sources */,
+				A6AB50A91D1D8860003B8665 /* OKFlickrPhotoResponseModel.m in Sources */,
+				A6AB50AF1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m in Sources */,
 				A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */,
+				A6AB50A61D1D87B8003B8665 /* OKFlickrPhotosModel.m in Sources */,
+				A6AB50A31D1D8461003B8665 /* OKFlickrPhotoModel.m in Sources */,
+				A6AB50AC1D1E90AF003B8665 /* OKData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

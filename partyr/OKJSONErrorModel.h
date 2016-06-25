@@ -10,6 +10,6 @@
 
 @interface OKJSONErrorModel : JSONModel
 @property (strong, nonatomic) NSString *stat;
-@property (assign, nonatomic) int code;
+@property (assign, nonatomic) NSInteger code;
 @property (strong, nonatomic) NSString *message;
 @end
