@@ -14,16 +14,14 @@
 #import "OKFlickrPhotoModel.h"
 #import "OKFlickrCollectionFooterView.h"
 #import "OKFlickrPhotoDetailView.h"
+#import "PureLayout.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define OKFlickrScaleSliderHeight 40.f
+
 @interface ViewController ()
-{
-    BOOL networkOperationInProgress;
-    UICollectionView *photoCollectionView;
-    CGFloat zoom;
-    BOOL zoomed;
-}
+
 @end
 
 @implementation ViewController
@@ -34,31 +32,49 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     
-    photoCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height) collectionViewLayout:layout];
-    photoCollectionView.delegate = self;
-    photoCollectionView.dataSource = self;
-    photoCollectionView.layer.masksToBounds = NO;
-    
-    [photoCollectionView registerClass:[OKFlickrSmallPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
-    
-    [photoCollectionView registerClass:[OKFlickrCollectionFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+    _photoCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width , self.view.frame.size.height) collectionViewLayout:layout];
+    _photoCollectionView.delegate = self;
+    _photoCollectionView.dataSource = self;
+    _photoCollectionView.layer.masksToBounds = NO;
+    _photoCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 0.0f);
 
-    [self.view addSubview:photoCollectionView];
+    [_photoCollectionView registerClass:[OKFlickrSmallPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
     
-    zoom = 3.f;
+    [_photoCollectionView registerClass:[OKFlickrCollectionFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+
+    [self.view addSubview:_photoCollectionView];
     
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 40.f, [UIScreen mainScreen].bounds.size.width, 40.f)];
-    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:slider];
+    [_photoCollectionView autoPinEdgesToSuperviewEdges];
+  
+    _collectionViewZoom = 3.f;
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - OKFlickrScaleSliderHeight, [UIScreen mainScreen].bounds.size.width, OKFlickrScaleSliderHeight)];
+    slider.thumbTintColor = OKPFlickrPink;
+    slider.tintColor = OKPFlickrBlue;
+    slider.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2f];
     [slider setValue:.7f];
+
+    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.view addSubview:slider];
+    
+    [slider autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+    [slider autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+    [slider autoPinEdgeToSuperviewEdge:ALEdgeRight];
+    [slider autoSetDimension:ALDimensionHeight toSize:OKFlickrScaleSliderHeight relation:NSLayoutRelationEqual];
     
     OKFlickrPhotoRequestModel *request = [OKFlickrPhotoRequestModel new];
     request.method = PhotoSearchEndpoint;
     request.tags = @"party";
     
-    networkOperationInProgress = YES;
+    _networkOperationInProgress = YES;
     
     [[OKServices sharedInstance] postRequestWithUrl:FlickrRestAPIUrl request:request onSuccess:^(OKJSONResponseModel *response) {
         
@@ -67,14 +83,14 @@
         [[OKData sharedInstance] setFlickrPhotos:formattedResponse.photos];
         [[OKData sharedInstance] setCurrentPage:formattedResponse.photos.page];
         
-        [photoCollectionView reloadData];
+        [_photoCollectionView reloadData];
 
-        networkOperationInProgress = NO;
+        _networkOperationInProgress = NO;
         
     } onFailure:^(OKJSONErrorModel *error) {
         NSLog(@"Failure: %@", error.toJSONString);
         
-        networkOperationInProgress = NO;
+        _networkOperationInProgress = NO;
         
     } responseClass:[OKFlickrPhotoResponseModel class]];
 }
@@ -82,19 +98,19 @@
 - (IBAction)sliderValueChanged:(UISlider *)slider
 {
     CGFloat newZoomLevel = floorf((1 - slider.value) * 10.f) + 1;
-    if (zoom != newZoomLevel) {
-        zoom = newZoomLevel;
-        [photoCollectionView reloadData];
+    if (_collectionViewZoom != newZoomLevel) {
+        _collectionViewZoom = newZoomLevel;
+        [_photoCollectionView reloadData];
     }
 }
 
 - (void) loadMorePictures
 {
-    if (networkOperationInProgress) {
+    if (_networkOperationInProgress) {
         return;
     }
     
-    networkOperationInProgress = YES;
+    _networkOperationInProgress = YES;
     
     OKFlickrPhotoRequestModel *request = [OKFlickrPhotoRequestModel new];
     request.method = PhotoSearchEndpoint;
@@ -116,14 +132,14 @@
         
         [[OKData sharedInstance] setCurrentPage:formattedResponse.photos.page];
 
-        [photoCollectionView reloadData];
+        [_photoCollectionView reloadData];
 
-        networkOperationInProgress = NO;
+        _networkOperationInProgress = NO;
         
     } onFailure:^(OKJSONErrorModel *error) {
         NSLog(@"Failure: %@", error.toJSONString);
         
-        networkOperationInProgress = NO;
+        _networkOperationInProgress = NO;
 
     } responseClass:[OKFlickrPhotoResponseModel class]];
 }
@@ -193,7 +209,7 @@
     
     CGFloat photoAspectRatio = cell.imageView.image.size.height / cell.imageView.image.size.width;
     CGFloat heightConsideringPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
-    CGFloat widthConsiderinPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
+//    CGFloat widthConsiderinPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
     
     CGRect targetFrame = CGRectMake((self.view.frame.size.width - heightConsideringPhotoAspectRatio) /2, (self.view.frame.size.height - heightConsideringPhotoAspectRatio) /2, heightConsideringPhotoAspectRatio, heightConsideringPhotoAspectRatio);
     
@@ -218,17 +234,17 @@
             detailView.alpha = 1;
         }];
     }];
-    zoomed = YES;
+    _collectionViewIsZoomed = YES;
 }
 
 - (void)zoomOutCollectionView
 {
-    if (zoomed) {
+    if (_collectionViewIsZoomed) {
         [UIView animateWithDuration:.4f animations:^{
-            photoCollectionView.transform = CGAffineTransformIdentity;
+            _photoCollectionView.transform = CGAffineTransformIdentity;
         }];
         
-        zoomed = NO;
+        _collectionViewIsZoomed = NO;
     }
 }
 
@@ -275,7 +291,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(collectionView.frame.size.width / zoom, collectionView.frame.size.width / zoom);
+    return CGSizeMake(collectionView.frame.size.width / _collectionViewZoom, collectionView.frame.size.width / _collectionViewZoom);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section

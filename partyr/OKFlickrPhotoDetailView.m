@@ -29,6 +29,8 @@
     
     UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSingleTap:)];
     singleTapGestureRecognizer.numberOfTapsRequired = 1;
+    [singleTapGestureRecognizer requireGestureRecognizerToFail:doubleTapGestureRecognizer];
+
     [_scrollView addGestureRecognizer:singleTapGestureRecognizer];
     
     _imageView = [[UIImageView alloc] initWithFrame:rect];

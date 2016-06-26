@@ -10,7 +10,9 @@
 #import "OKServices.h"
 
 @interface ViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-
-
+@property (assign, nonatomic) BOOL networkOperationInProgress;
+@property (assign, nonatomic) BOOL collectionViewIsZoomed;
+@property (assign, nonatomic) CGFloat collectionViewZoom;
+@property (strong, nonatomic) UICollectionView *photoCollectionView;
 @end
 
