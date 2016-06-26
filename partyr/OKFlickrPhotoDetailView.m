@@ -74,7 +74,8 @@
 
 - (IBAction)didDoubleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
-    UIScrollView *scrollView = (UIScrollView *)tapGestureRecognizer.view;
+    UIScrollView *scrollView = _scrollView;
+    
     [UIView animateWithDuration:.4f animations:^{
         if (scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.zoomScale = scrollView.minimumZoomScale;
@@ -86,7 +87,7 @@
 
 - (IBAction)didSingleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
-    [UIView animateWithDuration:.4f animations:^{
+    [UIView animateWithDuration:.2f animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];

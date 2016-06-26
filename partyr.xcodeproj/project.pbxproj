@@ -11,12 +11,12 @@
 		A62214421D1D789100EA672E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A62214411D1D789100EA672E /* AppDelegate.m */; };
 		A62214451D1D789100EA672E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62214441D1D789100EA672E /* ViewController.m */; };
 		A62214481D1D789100EA672E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A62214461D1D789100EA672E /* Main.storyboard */; };
-		A622144A1D1D789100EA672E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62214491D1D789100EA672E /* Assets.xcassets */; };
 		A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A622144B1D1D789100EA672E /* LaunchScreen.storyboard */; };
 		A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */; };
 		A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65A683D1D1EC94F00D57003 /* Icons.xcassets */; };
 		A65A68411D1EE9A900D57003 /* OKFlickrCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */; };
 		A65A68471D20042F00D57003 /* OKFlickrPhotoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */; };
+		A65A684B1D2016E200D57003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65A684A1D2016E200D57003 /* Assets.xcassets */; };
 		A6AB50971D1D7973003B8665 /* OKServices.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50961D1D7973003B8665 /* OKServices.m */; };
 		A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */; };
 		A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */; };
@@ -39,7 +39,6 @@
 		A62214431D1D789100EA672E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A62214441D1D789100EA672E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A62214471D1D789100EA672E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A62214491D1D789100EA672E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A622144C1D1D789100EA672E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A622144E1D1D789100EA672E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A65A68331D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrSmallPhotoCollectionViewCell.h; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrCollectionFooterView.m; sourceTree = "<group>"; };
 		A65A68451D20042F00D57003 /* OKFlickrPhotoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoDetailView.h; sourceTree = "<group>"; };
 		A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoDetailView.m; sourceTree = "<group>"; };
+		A65A684A1D2016E200D57003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6AB50951D1D7973003B8665 /* OKServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKServices.h; sourceTree = "<group>"; };
 		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKServices.m; sourceTree = "<group>"; };
 		A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONRequestModel.h; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 				A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */,
 				A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */,
 				A62214461D1D789100EA672E /* Main.storyboard */,
+				A65A684A1D2016E200D57003 /* Assets.xcassets */,
 				A65A683D1D1EC94F00D57003 /* Icons.xcassets */,
-				A62214491D1D789100EA672E /* Assets.xcassets */,
 				A622144B1D1D789100EA672E /* LaunchScreen.storyboard */,
 				A622144E1D1D789100EA672E /* Info.plist */,
 				A622143D1D1D789000EA672E /* Supporting Files */,
@@ -227,8 +227,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */,
-				A622144A1D1D789100EA672E /* Assets.xcassets in Resources */,
 				A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */,
+				A65A684B1D2016E200D57003 /* Assets.xcassets in Resources */,
 				A62214481D1D789100EA672E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

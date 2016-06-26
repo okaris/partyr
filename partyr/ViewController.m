@@ -43,7 +43,7 @@
     _photoCollectionView.delegate = self;
     _photoCollectionView.dataSource = self;
     _photoCollectionView.layer.masksToBounds = NO;
-    _photoCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, 0.0f, 0.0f);
+    _photoCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, OKFlickrScaleSliderHeight, 0.0f);
 
     [_photoCollectionView registerClass:[OKFlickrSmallPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
     
@@ -226,11 +226,11 @@
         [self zoomOutCollectionView];
     };
     
-    [UIView animateWithDuration:.4f animations:^{
+    [UIView animateWithDuration:.2f animations:^{
         collectionView.transform = transform;
     } completion:^(BOOL finished) {
                     [self.view addSubview:detailView];
-        [UIView animateWithDuration:.4f animations:^{
+        [UIView animateWithDuration:.2f animations:^{
             detailView.alpha = 1;
         }];
     }];
@@ -240,7 +240,7 @@
 - (void)zoomOutCollectionView
 {
     if (_collectionViewIsZoomed) {
-        [UIView animateWithDuration:.4f animations:^{
+        [UIView animateWithDuration:.2f animations:^{
             _photoCollectionView.transform = CGAffineTransformIdentity;
         }];
         
@@ -302,6 +302,11 @@
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0.f;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
