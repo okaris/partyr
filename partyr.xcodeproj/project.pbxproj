@@ -13,6 +13,9 @@
 		A62214481D1D789100EA672E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A62214461D1D789100EA672E /* Main.storyboard */; };
 		A622144A1D1D789100EA672E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A62214491D1D789100EA672E /* Assets.xcassets */; };
 		A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A622144B1D1D789100EA672E /* LaunchScreen.storyboard */; };
+		A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */; };
+		A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65A683D1D1EC94F00D57003 /* Icons.xcassets */; };
+		A65A68411D1EE9A900D57003 /* OKFlickrCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */; };
 		A6AB50971D1D7973003B8665 /* OKServices.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50961D1D7973003B8665 /* OKServices.m */; };
 		A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */; };
 		A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */; };
@@ -38,6 +41,11 @@
 		A62214491D1D789100EA672E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A622144C1D1D789100EA672E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A622144E1D1D789100EA672E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A65A68331D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrSmallPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrSmallPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		A65A683D1D1EC94F00D57003 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		A65A683F1D1EE9A900D57003 /* OKFlickrCollectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrCollectionFooterView.h; sourceTree = "<group>"; };
+		A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrCollectionFooterView.m; sourceTree = "<group>"; };
 		A6AB50951D1D7973003B8665 /* OKServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKServices.h; sourceTree = "<group>"; };
 		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKServices.m; sourceTree = "<group>"; };
 		A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONRequestModel.h; sourceTree = "<group>"; };
@@ -96,6 +104,10 @@
 				A62214411D1D789100EA672E /* AppDelegate.m */,
 				A62214431D1D789100EA672E /* ViewController.h */,
 				A62214441D1D789100EA672E /* ViewController.m */,
+				A65A68331D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.h */,
+				A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */,
+				A65A683F1D1EE9A900D57003 /* OKFlickrCollectionFooterView.h */,
+				A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */,
 				A6AB50AA1D1E90AE003B8665 /* OKData.h */,
 				A6AB50AB1D1E90AF003B8665 /* OKData.m */,
 				A6AB50951D1D7973003B8665 /* OKServices.h */,
@@ -115,6 +127,7 @@
 				A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */,
 				A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */,
 				A62214461D1D789100EA672E /* Main.storyboard */,
+				A65A683D1D1EC94F00D57003 /* Icons.xcassets */,
 				A62214491D1D789100EA672E /* Assets.xcassets */,
 				A622144B1D1D789100EA672E /* LaunchScreen.storyboard */,
 				A622144E1D1D789100EA672E /* Info.plist */,
@@ -210,6 +223,7 @@
 			files = (
 				A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */,
 				A622144A1D1D789100EA672E /* Assets.xcassets in Resources */,
+				A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */,
 				A62214481D1D789100EA672E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,12 +284,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */,
+				A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */,
 				A62214451D1D789100EA672E /* ViewController.m in Sources */,
 				A6AB50971D1D7973003B8665 /* OKServices.m in Sources */,
 				A62214421D1D789100EA672E /* AppDelegate.m in Sources */,
 				A6AB50A01D1D7C9A003B8665 /* OKJSONErrorModel.m in Sources */,
 				A622143F1D1D789000EA672E /* main.m in Sources */,
 				A6AB50A91D1D8860003B8665 /* OKFlickrPhotoResponseModel.m in Sources */,
+				A65A68411D1EE9A900D57003 /* OKFlickrCollectionFooterView.m in Sources */,
 				A6AB50AF1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m in Sources */,
 				A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */,
 				A6AB50A61D1D87B8003B8665 /* OKFlickrPhotosModel.m in Sources */,
@@ -394,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = partyr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.okaris.partyr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = partyr/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.okaris.partyr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
