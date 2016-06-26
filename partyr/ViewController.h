@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OKServices.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 
 @end
