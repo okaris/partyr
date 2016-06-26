@@ -12,7 +12,7 @@
 @interface OKData : NSObject
 
 @property (strong, nonatomic) OKFlickrPhotosModel *flickrPhotos;
-@property (strong, nonatomic) int currentPage;
+@property (assign, nonatomic) int currentPage;
 
 +(instancetype) sharedInstance;
 
