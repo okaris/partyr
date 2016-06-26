@@ -16,6 +16,7 @@
 		A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */; };
 		A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65A683D1D1EC94F00D57003 /* Icons.xcassets */; };
 		A65A68411D1EE9A900D57003 /* OKFlickrCollectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */; };
+		A65A68471D20042F00D57003 /* OKFlickrPhotoDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */; };
 		A6AB50971D1D7973003B8665 /* OKServices.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50961D1D7973003B8665 /* OKServices.m */; };
 		A6AB509A1D1D7C19003B8665 /* OKJSONRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */; };
 		A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AB509C1D1D7C78003B8665 /* OKJSONResponseModel.m */; };
@@ -46,6 +47,8 @@
 		A65A683D1D1EC94F00D57003 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		A65A683F1D1EE9A900D57003 /* OKFlickrCollectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrCollectionFooterView.h; sourceTree = "<group>"; };
 		A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrCollectionFooterView.m; sourceTree = "<group>"; };
+		A65A68451D20042F00D57003 /* OKFlickrPhotoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoDetailView.h; sourceTree = "<group>"; };
+		A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoDetailView.m; sourceTree = "<group>"; };
 		A6AB50951D1D7973003B8665 /* OKServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKServices.h; sourceTree = "<group>"; };
 		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKServices.m; sourceTree = "<group>"; };
 		A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONRequestModel.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */,
 				A65A683F1D1EE9A900D57003 /* OKFlickrCollectionFooterView.h */,
 				A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */,
+				A65A68451D20042F00D57003 /* OKFlickrPhotoDetailView.h */,
+				A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */,
 				A6AB50AA1D1E90AE003B8665 /* OKData.h */,
 				A6AB50AB1D1E90AF003B8665 /* OKData.m */,
 				A6AB50951D1D7973003B8665 /* OKServices.h */,
@@ -285,6 +290,7 @@
 			files = (
 				A6AB509D1D1D7C78003B8665 /* OKJSONResponseModel.m in Sources */,
 				A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */,
+				A65A68471D20042F00D57003 /* OKFlickrPhotoDetailView.m in Sources */,
 				A62214451D1D789100EA672E /* ViewController.m in Sources */,
 				A6AB50971D1D7973003B8665 /* OKServices.m in Sources */,
 				A62214421D1D789100EA672E /* AppDelegate.m in Sources */,

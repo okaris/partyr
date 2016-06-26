@@ -13,6 +13,7 @@
 #import "OKFlickrSmallPhotoCollectionViewCell.h"
 #import "OKFlickrPhotoModel.h"
 #import "OKFlickrCollectionFooterView.h"
+#import "OKFlickrPhotoDetailView.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -186,33 +187,57 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    OKFlickrSmallPhotoCollectionViewCell *cell = (OKFlickrSmallPhotoCollectionViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
+    OKFlickrPhotoModel *photo = (OKFlickrPhotoModel *) [[OKData sharedInstance].flickrPhotos.photo objectAtIndex:indexPath.item];
+    
+    CGFloat photoAspectRatio = cell.imageView.image.size.height / cell.imageView.image.size.width;
+    CGFloat heightConsideringPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
+    CGFloat widthConsiderinPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
+    
+    CGRect targetFrame = CGRectMake((self.view.frame.size.width - heightConsideringPhotoAspectRatio) /2, (self.view.frame.size.height - heightConsideringPhotoAspectRatio) /2, heightConsideringPhotoAspectRatio, heightConsideringPhotoAspectRatio);
+    
+    UICollectionViewLayoutAttributes * theAttributes = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
+    
+    CGRect cellFrameInSuperview = [collectionView convertRect:theAttributes.frame toView:self.view];
+    
+    CGAffineTransform transform = [self transformFromRect:cellFrameInSuperview toRect:targetFrame keepingAspectRatio:YES inParentView:collectionView]   ;
+    
+    OKFlickrPhotoDetailView * detailView = [self photoDetailViewWithPhoto:photo];
+    detailView.alpha = 0;
+    
+    detailView.onDismiss = ^(void){
+        [self zoomOutCollectionView];
+    };
+    
+    [UIView animateWithDuration:.4f animations:^{
+        collectionView.transform = transform;
+    } completion:^(BOOL finished) {
+                    [self.view addSubview:detailView];
+        [UIView animateWithDuration:.4f animations:^{
+            detailView.alpha = 1;
+        }];
+    }];
+    zoomed = YES;
+}
+
+- (void)zoomOutCollectionView
+{
     if (zoomed) {
         [UIView animateWithDuration:.4f animations:^{
-            collectionView.transform = CGAffineTransformIdentity;
+            photoCollectionView.transform = CGAffineTransformIdentity;
         }];
         
         zoomed = NO;
-    }else{
-    
-        CGRect targetFrame = CGRectMake(0, (self.view.frame.size.height - self.view.frame.size.width) /2, self.view.frame.size.width, self.view.frame.size.width);
-        
-        UICollectionViewLayoutAttributes * theAttributes = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
-        
-        CGRect cellFrameInSuperview = [collectionView convertRect:theAttributes.frame toView:self.view];
-        
-//        UIView *v = [[UIView alloc] initWithFrame:cellFrameInSuperview];
-//        v.backgroundColor = OKPFlickrPink;
-//        [self.view addSubview:v];
-        
-        CGAffineTransform transform = [self transformFromRect:cellFrameInSuperview toRect:targetFrame keepingAspectRatio:YES inParentView:collectionView]   ;
-        
-        [UIView animateWithDuration:.4f animations:^{
-            collectionView.transform = transform;
-        }];
-        zoomed = YES;
     }
+}
+
+- (OKFlickrPhotoDetailView *)photoDetailViewWithPhoto:(OKFlickrPhotoModel *)photo
+{
+    OKFlickrPhotoDetailView *detailView = [[OKFlickrPhotoDetailView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    detailView.photo = photo;
+    
+    return detailView;
 }
 
 - (CGAffineTransform)transformFromRect:(CGRect)sourceRect toRect:(CGRect)finalRect keepingAspectRatio:(BOOL)keepingAspectRatio inParentView:(UIView *)parentView {
