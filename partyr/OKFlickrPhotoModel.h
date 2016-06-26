@@ -31,4 +31,7 @@ typedef NS_ENUM(NSInteger, OKPhotoSizeConstants){
 @property (assign, nonatomic) int ispublic;
 @property (assign, nonatomic) int isfriend;
 @property (assign, nonatomic) int isfamily;
+
+- (NSURL *)photoURLWithSize:(int) size;
+
 @end
