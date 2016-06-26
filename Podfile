@@ -7,5 +7,6 @@ target 'partyr' do
 pod 'JSONModel'
 pod 'SDWebImage'
 pod 'AFNetworking', '~> 2.5.4'
+pod 'PureLayout'
 end
 
