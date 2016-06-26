@@ -51,6 +51,10 @@
         request.api_key = @"46383d223578cb195eb6f5e257affb6b";
     }
     
+    if (!request.per_page) {
+        request.per_page =  500;
+    }
+    
     request.nojsoncallback = 1;
     
     NSLog(@"Request: %@", request.toJSONString);
