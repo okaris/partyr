@@ -116,7 +116,17 @@
     
     // don't animate the change.
     scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
+    
+    if (scrollView.zoomBouncing && !scrollView.isTracking) {
+        if (scrollView.zoomScale == scrollView.minimumZoomScale) {
+            _onDismiss();
+        }
+    }
 }
 
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    
+}
 
 @end
