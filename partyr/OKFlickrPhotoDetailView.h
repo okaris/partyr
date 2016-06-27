@@ -13,7 +13,9 @@
 @interface OKFlickrPhotoDetailView : UIView <UIScrollViewDelegate>
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIImage *placeholderImage;
 @property (strong, nonatomic) OKFlickrPhotoModel *photo;
+@property (assign, nonatomic) CGAffineTransform dismissTransform;
 @property (copy, nonatomic) void (^onDismiss)(void);
 
 @end

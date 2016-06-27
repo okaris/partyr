@@ -15,7 +15,7 @@
 #import "OKFlickrCollectionFooterView.h"
 #import "OKFlickrPhotoDetailView.h"
 #import "PureLayout.h"
-
+#import "extobjc.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define OKFlickrScaleSliderHeight 40.f
@@ -219,40 +219,52 @@
     
     CGAffineTransform transform = [self transformFromRect:cellFrameInSuperview toRect:targetFrame keepingAspectRatio:YES inParentView:collectionView]   ;
     
-    OKFlickrPhotoDetailView * detailView = [self photoDetailViewWithPhoto:photo];
+    OKFlickrPhotoDetailView * detailView = [self photoDetailViewWithPhoto:photo andPlaceholderImage:cell.imageView.image];
     detailView.alpha = 0;
     
+    @weakify(detailView);
     detailView.onDismiss = ^(void){
-        [self zoomOutCollectionView];
+        @strongify(detailView);
+        [self zoomOutCollectionView:detailView];
     };
+    
+    [self.view addSubview:detailView];
+
+    detailView.transform = CGAffineTransformInvert(transform);
     
     [UIView animateWithDuration:.2f animations:^{
         collectionView.transform = transform;
+        detailView.transform = CGAffineTransformIdentity;
+        detailView.alpha = 1;
+
     } completion:^(BOOL finished) {
-                    [self.view addSubview:detailView];
-        [UIView animateWithDuration:.2f animations:^{
-            detailView.alpha = 1;
-        }];
+//        [UIView animateWithDuration:.2f animations:^{
+//            detailView.alpha = 1;
+//        }];
     }];
     _collectionViewIsZoomed = YES;
 }
 
-- (void)zoomOutCollectionView
+- (void)zoomOutCollectionView:(OKFlickrPhotoDetailView *)detailView
 {
     if (_collectionViewIsZoomed) {
         [UIView animateWithDuration:.2f animations:^{
             _photoCollectionView.transform = CGAffineTransformIdentity;
+            detailView.transform = detailView.dismissTransform;
+            detailView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [detailView removeFromSuperview];
         }];
         
         _collectionViewIsZoomed = NO;
     }
 }
 
-- (OKFlickrPhotoDetailView *)photoDetailViewWithPhoto:(OKFlickrPhotoModel *)photo
+- (OKFlickrPhotoDetailView *)photoDetailViewWithPhoto:(OKFlickrPhotoModel *)photo andPlaceholderImage:(UIImage *)placeholderImage
 {
     OKFlickrPhotoDetailView *detailView = [[OKFlickrPhotoDetailView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     detailView.photo = photo;
-    
+    detailView.placeholderImage = placeholderImage;
     return detailView;
 }
 

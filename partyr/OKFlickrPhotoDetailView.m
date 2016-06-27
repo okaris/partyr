@@ -39,8 +39,10 @@
     [_scrollView addSubview:_imageView];
     _scrollView.contentSize = rect.size;
     
+    _placeholderImage = _placeholderImage?:[UIImage imageNamed:@"42-photos"];
+    
     [_imageView sd_setImageWithURL:[_photo photoURLWithSize:OKPhotoSizeLarge]
-                            placeholderImage:[UIImage imageNamed:@"42-photos"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            placeholderImage:_placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 _imageView.contentMode = UIViewContentModeScaleAspectFit;
                                 _scrollView.contentSize = image.size;
                                 _imageView.frame = CGRectMake(0, (_scrollView.frame.size.height - image.size.height / image.size.width * _scrollView.frame.size.width) / 2, image.size.width, image.size.height);
@@ -87,12 +89,7 @@
 
 - (IBAction)didSingleTap:(UITapGestureRecognizer *)tapGestureRecognizer
 {
-    [UIView animateWithDuration:.2f animations:^{
-        self.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-        _onDismiss();
-    }];
+    _onDismiss();
 }
 
 // make the change during scrollViewDidScroll instead of didEndScrolling...
