@@ -6,11 +6,24 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A68E29DE1D2C105400068FAD /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A68E29DF1D2C105400068FAD /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				A68E29E21D2C106300068FAD /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OClint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A622143F1D1D789000EA672E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A622143E1D1D789000EA672E /* main.m */; };
 		A62214421D1D789100EA672E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A62214411D1D789100EA672E /* AppDelegate.m */; };
 		A62214451D1D789100EA672E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A62214441D1D789100EA672E /* ViewController.m */; };
-		A62214481D1D789100EA672E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A62214461D1D789100EA672E /* Main.storyboard */; };
 		A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A622144B1D1D789100EA672E /* LaunchScreen.storyboard */; };
 		A65A68351D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */; };
 		A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65A683D1D1EC94F00D57003 /* Icons.xcassets */; };
@@ -33,24 +46,23 @@
 		6D5496450326DB3288E3FBCE /* Pods-partyr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-partyr.release.xcconfig"; path = "Pods/Target Support Files/Pods-partyr/Pods-partyr.release.xcconfig"; sourceTree = "<group>"; };
 		76887681A742F6B24DE9C2C2 /* libPods-partyr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-partyr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A622143A1D1D789000EA672E /* partyr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = partyr.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A622143E1D1D789000EA672E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A622143E1D1D789000EA672E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A62214401D1D789100EA672E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A62214411D1D789100EA672E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A62214411D1D789100EA672E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A62214431D1D789100EA672E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		A62214441D1D789100EA672E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		A62214471D1D789100EA672E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A622144C1D1D789100EA672E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A622144E1D1D789100EA672E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A65A68331D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrSmallPhotoCollectionViewCell.h; sourceTree = "<group>"; };
-		A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrSmallPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		A65A68341D1EC2F200D57003 /* OKFlickrSmallPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKFlickrSmallPhotoCollectionViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A65A683D1D1EC94F00D57003 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		A65A683F1D1EE9A900D57003 /* OKFlickrCollectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrCollectionFooterView.h; sourceTree = "<group>"; };
-		A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrCollectionFooterView.m; sourceTree = "<group>"; };
+		A65A68401D1EE9A900D57003 /* OKFlickrCollectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKFlickrCollectionFooterView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A65A68451D20042F00D57003 /* OKFlickrPhotoDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoDetailView.h; sourceTree = "<group>"; };
-		A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoDetailView.m; sourceTree = "<group>"; };
+		A65A68461D20042F00D57003 /* OKFlickrPhotoDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKFlickrPhotoDetailView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A65A684A1D2016E200D57003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6AB50951D1D7973003B8665 /* OKServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKServices.h; sourceTree = "<group>"; };
-		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKServices.m; sourceTree = "<group>"; };
+		A6AB50961D1D7973003B8665 /* OKServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKServices.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6AB50981D1D7C19003B8665 /* OKJSONRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONRequestModel.h; sourceTree = "<group>"; };
 		A6AB50991D1D7C19003B8665 /* OKJSONRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONRequestModel.m; sourceTree = "<group>"; };
 		A6AB509B1D1D7C78003B8665 /* OKJSONResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONResponseModel.h; sourceTree = "<group>"; };
@@ -58,13 +70,13 @@
 		A6AB509E1D1D7C9A003B8665 /* OKJSONErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKJSONErrorModel.h; sourceTree = "<group>"; };
 		A6AB509F1D1D7C9A003B8665 /* OKJSONErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKJSONErrorModel.m; sourceTree = "<group>"; };
 		A6AB50A11D1D8461003B8665 /* OKFlickrPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoModel.h; sourceTree = "<group>"; };
-		A6AB50A21D1D8461003B8665 /* OKFlickrPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoModel.m; sourceTree = "<group>"; };
+		A6AB50A21D1D8461003B8665 /* OKFlickrPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKFlickrPhotoModel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6AB50A41D1D87B8003B8665 /* OKFlickrPhotosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotosModel.h; sourceTree = "<group>"; };
 		A6AB50A51D1D87B8003B8665 /* OKFlickrPhotosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotosModel.m; sourceTree = "<group>"; };
 		A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoResponseModel.h; sourceTree = "<group>"; };
 		A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoResponseModel.m; sourceTree = "<group>"; };
 		A6AB50AA1D1E90AE003B8665 /* OKData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKData.h; sourceTree = "<group>"; };
-		A6AB50AB1D1E90AF003B8665 /* OKData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKData.m; sourceTree = "<group>"; };
+		A6AB50AB1D1E90AF003B8665 /* OKData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OKData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A6AB50AD1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKFlickrPhotoRequestModel.h; sourceTree = "<group>"; };
 		A6AB50AE1D1EB1E9003B8665 /* OKFlickrPhotoRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKFlickrPhotoRequestModel.m; sourceTree = "<group>"; };
 		C76C89C21B0113AE335CDDFD /* Pods-partyr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-partyr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-partyr/Pods-partyr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,7 +143,6 @@
 				A6AB50A51D1D87B8003B8665 /* OKFlickrPhotosModel.m */,
 				A6AB50A71D1D8860003B8665 /* OKFlickrPhotoResponseModel.h */,
 				A6AB50A81D1D8860003B8665 /* OKFlickrPhotoResponseModel.m */,
-				A62214461D1D789100EA672E /* Main.storyboard */,
 				A65A684A1D2016E200D57003 /* Assets.xcassets */,
 				A65A683D1D1EC94F00D57003 /* Icons.xcassets */,
 				A622144B1D1D789100EA672E /* LaunchScreen.storyboard */,
@@ -201,6 +212,9 @@
 					A62214391D1D789000EA672E = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					A68E29DE1D2C105400068FAD = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = A62214351D1D789000EA672E /* Build configuration list for PBXProject "partyr" */;
@@ -217,6 +231,7 @@
 			projectRoot = "";
 			targets = (
 				A62214391D1D789000EA672E /* partyr */,
+				A68E29DE1D2C105400068FAD /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -229,7 +244,6 @@
 				A622144D1D1D789100EA672E /* LaunchScreen.storyboard in Resources */,
 				A65A683E1D1EC94F00D57003 /* Icons.xcassets in Resources */,
 				A65A684B1D2016E200D57003 /* Assets.xcassets in Resources */,
-				A62214481D1D789100EA672E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +279,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-partyr/Pods-partyr-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A68E29E21D2C106300068FAD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "OCLINT_HOME=/Users/omerkarisman/Desktop/\nexport PATH=$OCLINT_HOME/bin:$PATH\n\nsource ~/.bash_profile\n\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\ncd ${TARGET_TEMP_DIR}\n\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\n\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\nfi\n\n#if [-d report.html]; then\n#rm report.html\n#fi\n\n\n#run static analyzer\n#oclint-json-compilation-database -- -o=./report.html -html\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database -v oclint_args \"-report-type html -o $OCLINT_HOME/report.html\" | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
 		};
 		D22000E073FE761E543483E1 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -309,14 +336,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A62214461D1D789100EA672E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A62214471D1D789100EA672E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A622144B1D1D789100EA672E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -436,6 +455,20 @@
 			};
 			name = Release;
 		};
+		A68E29E01D2C105400068FAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A68E29E11D2C105400068FAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -456,6 +489,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A68E29DF1D2C105400068FAD /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A68E29E01D2C105400068FAD /* Debug */,
+				A68E29E11D2C105400068FAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
