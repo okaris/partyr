@@ -10,12 +10,14 @@
 
 @implementation OKData
 
-+(instancetype) sharedInstance{
-    
++(instancetype) sharedInstance
+{
     static OKData* instance = nil;
     
-    @synchronized( self ) {
-        if( instance == nil ) {
+    @synchronized( self )
+    {
+        if( instance == nil )
+        {
             instance = [[OKData alloc] init];
         }
     }
@@ -23,11 +25,12 @@
     return instance;
 }
 
--(instancetype)init{
-    if ( (self = [super init]) )
-    {
-        
-    }
+-(instancetype)init
+{
+//    if ( (self = [super init]) )
+//    {
+//        
+//    }
     return self;
 }
 

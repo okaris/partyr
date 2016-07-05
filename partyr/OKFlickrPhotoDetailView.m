@@ -42,7 +42,9 @@
     _placeholderImage = _placeholderImage?:[UIImage imageNamed:@"42-photos"];
     
     [_imageView sd_setImageWithURL:[_photo photoURLWithSize:OKPhotoSizeLarge]
-                            placeholderImage:_placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                  placeholderImage:_placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+                            {
+                                _didLoadBiggerImage = YES;
                                 _imageView.contentMode = UIViewContentModeScaleAspectFit;
                                 _scrollView.contentSize = image.size;
                                 _imageView.frame = CGRectMake(0, (_scrollView.frame.size.height - image.size.height / image.size.width * _scrollView.frame.size.width) / 2, image.size.width, image.size.height);
@@ -79,7 +81,8 @@
     UIScrollView *scrollView = _scrollView;
     
     [UIView animateWithDuration:.4f animations:^{
-        if (scrollView.zoomScale > scrollView.minimumZoomScale) {
+        if (scrollView.zoomScale > scrollView.minimumZoomScale)
+        {
             scrollView.zoomScale = scrollView.minimumZoomScale;
         }else{
             scrollView.zoomScale = (scrollView.minimumZoomScale + scrollView.maximumZoomScale) / 2;
@@ -95,14 +98,20 @@
 // make the change during scrollViewDidScroll instead of didEndScrolling...
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
+    if (!_didLoadBiggerImage) {
+        return;
+    }
+    
     CGSize imageViewSize = self.imageView.frame.size;
     CGSize imageSize = self.imageView.image.size;
     
     CGSize realImageSize;
-    if(imageSize.width / imageSize.height > imageViewSize.width / imageViewSize.height) {
+    if(imageSize.width / imageSize.height > imageViewSize.width / imageViewSize.height)
+    {
         realImageSize = CGSizeMake(imageViewSize.width, imageViewSize.width / imageSize.width * imageSize.height);
     }
-    else {
+    else
+    {
         realImageSize = CGSizeMake(imageViewSize.height / imageSize.height * imageSize.width, imageViewSize.height);
     }
     
@@ -111,14 +120,16 @@
     self.imageView.frame = newFrame;
     
     CGSize screenSize = scrollView.frame.size;
-    float offsetX = (screenSize.width > realImageSize.width ? (screenSize.width - realImageSize.width) / 2 : 0);
-    float offsetY = (screenSize.height > realImageSize.height ? (screenSize.height - realImageSize.height) / 2 : 0);
+    float offsetX = screenSize.width > realImageSize.width ? (screenSize.width - realImageSize.width) / 2 : 0;
+    float offsetY = screenSize.height > realImageSize.height ? (screenSize.height - realImageSize.height) / 2 : 0;
     
     // don't animate the change.
     scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
     
-    if (scrollView.zoomBouncing && !scrollView.isTracking) {
-        if (scrollView.zoomScale == scrollView.minimumZoomScale) {
+    if (scrollView.zoomBouncing && !scrollView.isTracking)
+    {
+        if (scrollView.zoomScale == scrollView.minimumZoomScale)
+        {
             _onDismiss();
         }
     }
