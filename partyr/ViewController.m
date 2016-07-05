@@ -20,13 +20,16 @@
 
 #define OKFlickrScaleSliderHeight 40.f
 
+NSInteger const itemsBeforeEndToPullMoreData = 10;
+
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -43,7 +46,7 @@
     _photoCollectionView.delegate = self;
     _photoCollectionView.dataSource = self;
     _photoCollectionView.layer.masksToBounds = NO;
-    _photoCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, OKFlickrScaleSliderHeight, 0.0f);
+    _photoCollectionView.contentInset = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height, 0.0f, OKFlickrScaleSliderHeight, 0.0f);
 
     [_photoCollectionView registerClass:[OKFlickrSmallPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
     
@@ -53,13 +56,15 @@
     
     [_photoCollectionView autoPinEdgesToSuperviewEdges];
   
-    _collectionViewZoom = 3.f;
+    CGFloat initialCollectionViewZoom = 3.f;
+    
+    _collectionViewZoom = initialCollectionViewZoom;
     
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - OKFlickrScaleSliderHeight, [UIScreen mainScreen].bounds.size.width, OKFlickrScaleSliderHeight)];
     slider.thumbTintColor = OKPFlickrPink;
     slider.tintColor = OKPFlickrBlue;
     slider.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2f];
-    [slider setValue:.7f];
+    [slider setValue: 1.f - initialCollectionViewZoom/10.f];
 
     [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     

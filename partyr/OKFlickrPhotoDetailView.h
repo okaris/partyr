@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIImage *placeholderImage;
 @property (strong, nonatomic) OKFlickrPhotoModel *photo;
 @property (assign, nonatomic) CGAffineTransform dismissTransform;
+@property (assign, nonatomic) BOOL didLoadBiggerImage;
 @property (copy, nonatomic) void (^onDismiss)(void);
 
 @end

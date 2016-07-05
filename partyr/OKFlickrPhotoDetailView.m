@@ -9,11 +9,18 @@
 #import "OKFlickrPhotoDetailView.h"
 #import "PureLayout.h"
 
+CGFloat const captionViewMinimumHeight = 20.f;
+
 @implementation OKFlickrPhotoDetailView
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self prepareLayout:self.bounds];
+}
+
+- (void)prepareLayout:(CGRect)rect
+{
     self.backgroundColor = [UIColor blackColor];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:rect];
@@ -23,18 +30,20 @@
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     
-    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didDoubleTap:)];
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                          initWithTarget:self action:@selector(didDoubleTap:)];
     doubleTapGestureRecognizer.numberOfTapsRequired = 2;
     [_scrollView addGestureRecognizer:doubleTapGestureRecognizer];
     
-    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSingleTap:)];
+    UITapGestureRecognizer *singleTapGestureRecognizer = [[UITapGestureRecognizer alloc]
+                                                          initWithTarget:self action:@selector(didSingleTap:)];
     singleTapGestureRecognizer.numberOfTapsRequired = 1;
     [singleTapGestureRecognizer requireGestureRecognizerToFail:doubleTapGestureRecognizer];
 
     [_scrollView addGestureRecognizer:singleTapGestureRecognizer];
     
     _imageView = [[UIImageView alloc] initWithFrame:rect];
-    _imageView.contentMode = UIViewContentModeCenter;
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     [_scrollView addSubview:_imageView];
     _scrollView.contentSize = rect.size;
@@ -66,7 +75,8 @@
     [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
     [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
     [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
-    [captionLabel autoSetDimension:ALDimensionHeight toSize:20.f relation:NSLayoutRelationGreaterThanOrEqual];
+    [captionLabel autoSetDimension:ALDimensionHeight toSize:captionViewMinimumHeight
+                          relation:NSLayoutRelationGreaterThanOrEqual];
 
     [_scrollView autoPinEdgesToSuperviewEdges];
 }
