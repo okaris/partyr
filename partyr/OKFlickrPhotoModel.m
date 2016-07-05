@@ -14,7 +14,8 @@
 {
     NSString *sizeString;
     
-    switch (size) {
+    switch (size)
+    {
         case OKPhotoSizeSmallSquare:
             sizeString = @"s";
             break;

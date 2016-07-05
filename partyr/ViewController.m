@@ -20,13 +20,16 @@
 
 #define OKFlickrScaleSliderHeight 40.f
 
+NSInteger const itemsBeforeEndToPullMoreData = 10;
+
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
@@ -43,7 +46,7 @@
     _photoCollectionView.delegate = self;
     _photoCollectionView.dataSource = self;
     _photoCollectionView.layer.masksToBounds = NO;
-    _photoCollectionView.contentInset = UIEdgeInsetsMake(20.0f, 0.0f, OKFlickrScaleSliderHeight, 0.0f);
+    _photoCollectionView.contentInset = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height, 0.0f, OKFlickrScaleSliderHeight, 0.0f);
 
     [_photoCollectionView registerClass:[OKFlickrSmallPhotoCollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];
     
@@ -53,13 +56,15 @@
     
     [_photoCollectionView autoPinEdgesToSuperviewEdges];
   
-    _collectionViewZoom = 3.f;
+    CGFloat initialCollectionViewZoom = 3.f;
+    
+    _collectionViewZoom = initialCollectionViewZoom;
     
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - OKFlickrScaleSliderHeight, [UIScreen mainScreen].bounds.size.width, OKFlickrScaleSliderHeight)];
     slider.thumbTintColor = OKPFlickrPink;
     slider.tintColor = OKPFlickrBlue;
     slider.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2f];
-    [slider setValue:.7f];
+    [slider setValue: 1.f - initialCollectionViewZoom/10.f];
 
     [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
@@ -76,8 +81,8 @@
     
     _networkOperationInProgress = YES;
     
-    [[OKServices sharedInstance] postRequestWithUrl:FlickrRestAPIUrl request:request onSuccess:^(OKJSONResponseModel *response) {
-        
+    [[OKServices sharedInstance] postRequestWithUrl:FlickrRestAPIUrl request:request onSuccess:^(OKJSONResponseModel *response)
+    {        
         OKFlickrPhotoResponseModel *formattedResponse = (OKFlickrPhotoResponseModel *)response;
         NSLog(@"Response: %@",formattedResponse.toJSONString);
         [[OKData sharedInstance] setFlickrPhotos:formattedResponse.photos];
@@ -87,7 +92,8 @@
 
         _networkOperationInProgress = NO;
         
-    } onFailure:^(OKJSONErrorModel *error) {
+    } onFailure:^(OKJSONErrorModel *error)
+    {
         NSLog(@"Failure: %@", error.toJSONString);
         
         _networkOperationInProgress = NO;
@@ -98,7 +104,8 @@
 - (IBAction)sliderValueChanged:(UISlider *)slider
 {
     CGFloat newZoomLevel = floorf((1 - slider.value) * 10.f) + 1;
-    if (_collectionViewZoom != newZoomLevel) {
+    if (_collectionViewZoom != newZoomLevel)
+    {
         _collectionViewZoom = newZoomLevel;
         [_photoCollectionView reloadData];
     }
@@ -106,7 +113,8 @@
 
 - (void) loadMorePictures
 {
-    if (_networkOperationInProgress) {
+    if (_networkOperationInProgress)
+    {
         return;
     }
     
@@ -117,8 +125,8 @@
     request.tags = @"party";
     request.page = [OKData sharedInstance].currentPage + 1;
     
-    [[OKServices sharedInstance] postRequestWithUrl:FlickrRestAPIUrl request:request onSuccess:^(OKJSONResponseModel *response) {
-        
+    [[OKServices sharedInstance] postRequestWithUrl:FlickrRestAPIUrl request:request onSuccess:^(OKJSONResponseModel *response)
+    {
         OKFlickrPhotoResponseModel *formattedResponse = (OKFlickrPhotoResponseModel *)response;
         NSLog(@"Response: %@",formattedResponse.toJSONString);
         
@@ -136,7 +144,8 @@
 
         _networkOperationInProgress = NO;
         
-    } onFailure:^(OKJSONErrorModel *error) {
+    } onFailure:^(OKJSONErrorModel *error)
+    {
         NSLog(@"Failure: %@", error.toJSONString);
         
         _networkOperationInProgress = NO;
@@ -159,7 +168,7 @@
     
     [self configureCell:cell forItemAtIndexPath:indexPath];
     
-    if(indexPath.item == [OKData sharedInstance].flickrPhotos.photo.count - 10)
+    if(indexPath.item == [OKData sharedInstance].flickrPhotos.photo.count - itemsBeforeEndToPullMoreData)
     {
         [self loadMorePictures];
     }
@@ -173,35 +182,44 @@
     OKFlickrPhotoModel *photo = (OKFlickrPhotoModel *) [[OKData sharedInstance].flickrPhotos.photo objectAtIndex:indexPath.item];
     
     [cell.imageView sd_setImageWithURL:[photo photoURLWithSize:OKPhotoSizeSmall]
-                      placeholderImage:[UIImage imageNamed:@"42-photos"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                          cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                      placeholderImage:[UIImage imageNamed:@"42-photos"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+                      {
+                            cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
                       }];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)theCollectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)theIndexPath
 {
-    UICollectionReusableView *theView;
     
     if(kind == UICollectionElementKindSectionHeader)
     {
         return nil;
-    } else {
-        theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:theIndexPath];
     }
+    
+    UICollectionReusableView *theView = [theCollectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:theIndexPath];
     
     return theView;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    if ([self collectionView:collectionView numberOfItemsInSection:section] == 0) {
+    if ([self collectionView:collectionView numberOfItemsInSection:section] == 0)
+    {
         return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.height);
-    }else{
-        return CGSizeMake(collectionView.frame.size.width, 40.f);
     }
+    
+    return CGSizeMake(collectionView.frame.size.width, OKFlickrScaleSliderHeight);
+
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self zoomInCollectionViewAndDisplayDetailView:collectionView fromCellAtIndexPath:indexPath completion:^(BOOL finished) {
+        _collectionViewIsZoomed = YES;
+    }];
+}
+
+- (void)zoomInCollectionViewAndDisplayDetailView:(UICollectionView *)collectionView fromCellAtIndexPath:(NSIndexPath *)indexPath completion:(void (^ __nullable)(BOOL finished))completion
 {
     OKFlickrSmallPhotoCollectionViewCell *cell = (OKFlickrSmallPhotoCollectionViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
@@ -209,7 +227,10 @@
     
     CGFloat photoAspectRatio = cell.imageView.image.size.height / cell.imageView.image.size.width;
     CGFloat heightConsideringPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
-//    CGFloat widthConsiderinPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
+    //    CGFloat widthConsiderinPhotoAspectRatio = self.view.frame.size.width * photoAspectRatio;
+    if (heightConsideringPhotoAspectRatio > self.view.frame.size.width) {
+        heightConsideringPhotoAspectRatio = self.view.frame.size.width;
+    }
     
     CGRect targetFrame = CGRectMake((self.view.frame.size.width - heightConsideringPhotoAspectRatio) /2, (self.view.frame.size.height - heightConsideringPhotoAspectRatio) /2, heightConsideringPhotoAspectRatio, heightConsideringPhotoAspectRatio);
     
@@ -229,30 +250,26 @@
     };
     
     [self.view addSubview:detailView];
-
+    
     detailView.transform = CGAffineTransformInvert(transform);
     
     [UIView animateWithDuration:.2f animations:^{
         collectionView.transform = transform;
         detailView.transform = CGAffineTransformIdentity;
         detailView.alpha = 1;
-
-    } completion:^(BOOL finished) {
-//        [UIView animateWithDuration:.2f animations:^{
-//            detailView.alpha = 1;
-//        }];
-    }];
-    _collectionViewIsZoomed = YES;
+    } completion:completion];
 }
 
 - (void)zoomOutCollectionView:(OKFlickrPhotoDetailView *)detailView
 {
-    if (_collectionViewIsZoomed) {
+    if (_collectionViewIsZoomed)
+    {
         [UIView animateWithDuration:.2f animations:^{
             _photoCollectionView.transform = CGAffineTransformIdentity;
             detailView.transform = detailView.dismissTransform;
             detailView.alpha = 0;
-        } completion:^(BOOL finished) {
+        } completion:^(BOOL finished)
+        {
             [detailView removeFromSuperview];
         }];
         
@@ -268,7 +285,8 @@
     return detailView;
 }
 
-- (CGAffineTransform)transformFromRect:(CGRect)sourceRect toRect:(CGRect)finalRect keepingAspectRatio:(BOOL)keepingAspectRatio inParentView:(UIView *)parentView {
+- (CGAffineTransform)transformFromRect:(CGRect)sourceRect toRect:(CGRect)finalRect keepingAspectRatio:(BOOL)keepingAspectRatio inParentView:(UIView *)parentView
+{
     CGAffineTransform transform = CGAffineTransformIdentity;
 
     CGFloat transformRatioX = CGRectGetWidth(finalRect)/CGRectGetWidth(sourceRect);
@@ -282,15 +300,18 @@
     CGAffineTransform transformTranslate = CGAffineTransformTranslate(transform, -(CGRectGetMinX(sourceRect)-CGRectGetMinX(finalRect)), -(CGRectGetMinY(sourceRect)-CGRectGetMinY(finalRect)));
     
     CGAffineTransform transformScale;
-    if (keepingAspectRatio) {
+    if (keepingAspectRatio)
+    {
         CGFloat sourceAspectRatio = sourceRect.size.width/sourceRect.size.height;
         CGFloat finalAspectRatio = finalRect.size.width/finalRect.size.height;
         
-        if (sourceAspectRatio > finalAspectRatio) {
+        if (sourceAspectRatio > finalAspectRatio)
+        {
             transformScale = CGAffineTransformScale(transform, transformRatioY, transformRatioY);
         } else {
             transformScale = CGAffineTransformScale(transform, transformRatioX, transformRatioX);
         }
+        
     } else {
         transformScale = CGAffineTransformScale(transform, transformRatioX, transformRatioY);
     }
@@ -321,8 +342,8 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)didReceiveMemoryWarning
+{    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 

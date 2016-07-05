@@ -14,7 +14,8 @@
 
 - (UIImageView *) imageView
 {
-    if (!_imageView) {
+    if (!_imageView)
+    {
         _imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
         
         _imageView.contentMode = UIViewContentModeCenter;
