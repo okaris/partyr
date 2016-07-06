@@ -23,7 +23,7 @@
 NSInteger const itemsBeforeEndToPullMoreData = 10;
 
 @interface ViewController ()
-
+@property (strong, nonatomic) OKFlickrSmallPhotoCollectionViewCell *zoomedCell;
 @end
 
 @implementation ViewController
@@ -221,7 +221,8 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
 
 - (void)zoomInCollectionViewAndDisplayDetailView:(UICollectionView *)collectionView fromCellAtIndexPath:(NSIndexPath *)indexPath completion:(void (^ __nullable)(BOOL finished))completion
 {
-    OKFlickrSmallPhotoCollectionViewCell *cell = (OKFlickrSmallPhotoCollectionViewCell *)[self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    OKFlickrSmallPhotoCollectionViewCell *cell = (OKFlickrSmallPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    _zoomedCell = cell;
     
     OKFlickrPhotoModel *photo = (OKFlickrPhotoModel *) [[OKData sharedInstance].flickrPhotos.photo objectAtIndex:indexPath.item];
     
@@ -258,7 +259,10 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
         collectionView.transform = transform;
         detailView.transform = CGAffineTransformIdentity;
         detailView.alpha = 1;
-    } completion:completion];
+    } completion:^(BOOL finished) {
+        [cell hideImage];
+        completion(finished);
+    }];
 }
 
 - (void)zoomOutCollectionView:(OKFlickrPhotoDetailView *)detailView
@@ -269,6 +273,7 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
             _photoCollectionView.transform = CGAffineTransformIdentity;
             detailView.transform = detailView.dismissTransform;
             detailView.alpha = 0;
+            [_zoomedCell showImage];
         } completion:^(BOOL finished)
         {
             [detailView removeFromSuperview];

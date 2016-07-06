@@ -126,7 +126,7 @@ CGFloat const minimumBackgroundAlpha = .2f;
     if ([panGestureRecognizer state] == UIGestureRecognizerStateEnded)
     {
         [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:.1f];
+        [UIView setAnimationDuration:.2f];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [UIView setAnimationDelegate:self];
         [_scrollView setCenter:CGPointMake(_firstLocation.x, _firstLocation.y)];

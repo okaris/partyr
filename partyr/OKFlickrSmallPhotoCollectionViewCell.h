@@ -10,4 +10,8 @@
 
 @interface OKFlickrSmallPhotoCollectionViewCell : UICollectionViewCell
 @property (strong, nonatomic) UIImageView *imageView;
+
+- (void)hideImage;
+- (void)showImage;
+
 @end

@@ -33,8 +33,10 @@ CGFloat const BallWidth = 20.f;
 - (void)prepareLayout:(CGRect)rect
 {
     blueView = [[UIView alloc] init];
-    
+    [self addSubview:blueView];
+
     pinkView = [[UIView alloc] init];
+    [self addSubview:pinkView];
 }
 
 - (void)layoutSubviews
@@ -47,13 +49,11 @@ CGFloat const BallWidth = 20.f;
     blueView.backgroundColor = OKPFlickrBlue;
     blueView.layer.cornerRadius = BallWidth/2;
     blueView.layer.masksToBounds = YES;
-    [self addSubview:blueView];
     
     pinkView.frame = CGRectMake(rect.size.width/2, (rect.size.height - BallWidth)/2, BallWidth, BallWidth);
     pinkView.backgroundColor = OKPFlickrPink;
     pinkView.layer.cornerRadius = BallWidth/2;
     pinkView.layer.masksToBounds = YES;
-    [self addSubview:pinkView];
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -77,6 +77,7 @@ CGFloat const BallWidth = 20.f;
     } completion:^(BOOL finished)
     {
         [self bringSubviewToFront:blueView];
+        
         [UIView animateWithDuration:.4f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             pinkView.frame = CGRectMake(self.frame.size.width/2, (self.frame.size.height - BallWidth)/2, BallWidth, 20);
             blueView.frame = CGRectMake(self.frame.size.width/2 - BallWidth, (self.frame.size.height - BallWidth) / 2, BallWidth, BallWidth);
