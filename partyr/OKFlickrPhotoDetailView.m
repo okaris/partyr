@@ -10,6 +10,7 @@
 #import "PureLayout.h"
 
 CGFloat const captionViewMinimumHeight = 20.f;
+CGFloat const minimumBackgroundAlpha = .2f;
 
 @implementation OKFlickrPhotoDetailView
 
@@ -21,7 +22,12 @@ CGFloat const captionViewMinimumHeight = 20.f;
 
 - (void)prepareLayout:(CGRect)rect
 {
-    self.backgroundColor = [UIColor blackColor];
+    _backgroundView = [[UIView alloc] initWithFrame:rect];
+    _backgroundView.backgroundColor = [UIColor blackColor];
+    
+    [self addSubview:_backgroundView];
+    
+    [_backgroundView autoPinEdgesToSuperviewEdges];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:rect];
     _scrollView.delegate = self;
@@ -29,6 +35,10 @@ CGFloat const captionViewMinimumHeight = 20.f;
     _scrollView.minimumZoomScale = 1.0;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
+    
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidPan:)];
+    
+    [self addGestureRecognizer:_panGestureRecognizer];
     
     UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc]
                                                           initWithTarget:self action:@selector(didDoubleTap:)];
@@ -63,19 +73,19 @@ CGFloat const captionViewMinimumHeight = 20.f;
 
     [self addSubview:_scrollView];
     
-    UILabel *captionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    captionLabel.textColor = [UIColor whiteColor];
-    captionLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2f];
-    captionLabel.font = [UIFont systemFontOfSize:14.f weight:UIFontWeightThin];
-    captionLabel.numberOfLines = 0;
-    captionLabel.text = _photo.title;
+    _captionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    _captionLabel.textColor = [UIColor whiteColor];
+    _captionLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2f];
+    _captionLabel.font = [UIFont systemFontOfSize:14.f weight:UIFontWeightThin];
+    _captionLabel.numberOfLines = 0;
+    _captionLabel.text = _photo.title;
     
-    [self addSubview:captionLabel];
+    [self addSubview:_captionLabel];
     
-    [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-    [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
-    [captionLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
-    [captionLabel autoSetDimension:ALDimensionHeight toSize:captionViewMinimumHeight
+    [_captionLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+    [_captionLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+    [_captionLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
+    [_captionLabel autoSetDimension:ALDimensionHeight toSize:captionViewMinimumHeight
                           relation:NSLayoutRelationGreaterThanOrEqual];
 
     [_scrollView autoPinEdgesToSuperviewEdges];
@@ -84,6 +94,57 @@ CGFloat const captionViewMinimumHeight = 20.f;
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return _imageView;
+}
+
+- (void)viewDidPan:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    if (_scrollView.zoomScale > _scrollView.minimumZoomScale) {
+        return;
+    }
+    if ([panGestureRecognizer state] == UIGestureRecognizerStateBegan)
+    {
+        _firstLocation.x = [_scrollView center].x;
+        _firstLocation.y = [_scrollView center].y;
+    }
+    
+    CGPoint translatedPoint = [panGestureRecognizer translationInView:panGestureRecognizer.view.superview];
+    
+    translatedPoint = CGPointMake(_firstLocation.x + translatedPoint.x, _firstLocation.y + translatedPoint.y);
+
+    CGFloat alpha = 1.f - [self distanceBetween:_firstLocation and:translatedPoint] / 100.f;
+
+    alpha = alpha>minimumBackgroundAlpha?alpha:minimumBackgroundAlpha;
+    
+    if ([panGestureRecognizer state] == UIGestureRecognizerStateChanged)
+    {
+        [_scrollView setCenter:translatedPoint];
+        
+        _backgroundView.alpha = alpha;
+        _captionLabel.alpha = alpha;
+    }
+    
+    if ([panGestureRecognizer state] == UIGestureRecognizerStateEnded)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:.1f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDelegate:self];
+        [_scrollView setCenter:CGPointMake(_firstLocation.x, _firstLocation.y)];
+        
+        _backgroundView.alpha = 1;
+        _captionLabel.alpha = 1;
+
+        [UIView commitAnimations];
+        
+        if (alpha == minimumBackgroundAlpha) {
+            _onDismiss();
+        }
+    }
+}
+
+- (float) distanceBetween : (CGPoint) p1 and: (CGPoint)p2
+{
+    return sqrt(pow(p2.x-p1.x,2)+pow(p2.y-p1.y,2));
 }
 
 - (IBAction)didDoubleTap:(UITapGestureRecognizer *)tapGestureRecognizer
@@ -133,21 +194,24 @@ CGFloat const captionViewMinimumHeight = 20.f;
     float offsetX = screenSize.width > realImageSize.width ? (screenSize.width - realImageSize.width) / 2 : 0;
     float offsetY = screenSize.height > realImageSize.height ? (screenSize.height - realImageSize.height) / 2 : 0;
     
-    // don't animate the change.
     scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
     
-    if (scrollView.zoomBouncing && !scrollView.isTracking)
-    {
-        if (scrollView.zoomScale == scrollView.minimumZoomScale)
-        {
-            _onDismiss();
-        }
-    }
+//    if (scrollView.zoomBouncing && !scrollView.isTracking)
+//    {
+//        if (scrollView.zoomScale == scrollView.minimumZoomScale)
+//        {
+//            _onDismiss();
+//        }
+//    }
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-    
+    if (scale == scrollView.minimumZoomScale) {
+        [self addGestureRecognizer:_panGestureRecognizer];
+    }else{
+        [self removeGestureRecognizer:_panGestureRecognizer];
+    }
 }
 
 @end
