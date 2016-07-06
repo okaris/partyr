@@ -55,12 +55,17 @@ CGFloat const BallWidth = 20.f;
     pinkView.layer.masksToBounds = YES;
     [self addSubview:pinkView];
     
-    [self startAnimating];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self startAnimating];
+        
+        
+        [NSTimer scheduledTimerWithTimeInterval: .8f
+                                         target: self
+                                       selector:@selector(startAnimating)
+                                       userInfo: nil repeats:YES];
+    });
     
-    [NSTimer scheduledTimerWithTimeInterval: .8f
-                                     target: self
-                                   selector:@selector(startAnimating)
-                                   userInfo: nil repeats:YES];
 
 }
 

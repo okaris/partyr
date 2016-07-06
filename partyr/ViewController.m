@@ -251,7 +251,8 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
     
     [self.view addSubview:detailView];
     
-    detailView.transform = CGAffineTransformInvert(transform);
+    detailView.dismissTransform = CGAffineTransformInvert(transform);
+    detailView.transform = detailView.dismissTransform;
     
     [UIView animateWithDuration:.2f animations:^{
         collectionView.transform = transform;
