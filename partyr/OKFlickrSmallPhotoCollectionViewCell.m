@@ -30,6 +30,16 @@
     return _imageView;
 }
 
+- (void)hideImage
+{
+    _imageView.alpha = 0;
+}
+
+- (void)showImage
+{
+    _imageView.alpha = 1;
+}
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
