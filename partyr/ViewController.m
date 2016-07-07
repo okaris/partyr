@@ -255,7 +255,7 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
     detailView.dismissTransform = CGAffineTransformInvert(transform);
     detailView.transform = detailView.dismissTransform;
     
-    [UIView animateWithDuration:.2f animations:^{
+    [UIView animateWithDuration:.4f animations:^{
         collectionView.transform = transform;
         detailView.transform = CGAffineTransformIdentity;
         detailView.alpha = 1;
@@ -269,13 +269,13 @@ NSInteger const itemsBeforeEndToPullMoreData = 10;
 {
     if (_collectionViewIsZoomed)
     {
-        [UIView animateWithDuration:.2f animations:^{
+        [UIView animateWithDuration:.4f animations:^{
             _photoCollectionView.transform = CGAffineTransformIdentity;
             detailView.transform = detailView.dismissTransform;
-            detailView.alpha = 0;
-            [_zoomedCell showImage];
+            [detailView hideEverythingExceptImage];
         } completion:^(BOOL finished)
         {
+            [_zoomedCell showImage];
             [detailView removeFromSuperview];
         }];
         

@@ -126,14 +126,16 @@ CGFloat const minimumBackgroundAlpha = .2f;
     if ([panGestureRecognizer state] == UIGestureRecognizerStateEnded)
     {
         [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:.2f];
+        [UIView setAnimationDuration:.4f];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         [UIView setAnimationDelegate:self];
         [_scrollView setCenter:CGPointMake(_firstLocation.x, _firstLocation.y)];
         
-        _backgroundView.alpha = 1;
-        _captionLabel.alpha = 1;
-
+        if (alpha != minimumBackgroundAlpha) {
+            _backgroundView.alpha = 1;
+            _captionLabel.alpha = 1;
+        }
+    
         [UIView commitAnimations];
         
         if (alpha == minimumBackgroundAlpha) {
@@ -195,14 +197,6 @@ CGFloat const minimumBackgroundAlpha = .2f;
     float offsetY = screenSize.height > realImageSize.height ? (screenSize.height - realImageSize.height) / 2 : 0;
     
     scrollView.contentInset = UIEdgeInsetsMake(offsetY, offsetX, offsetY, offsetX);
-    
-//    if (scrollView.zoomBouncing && !scrollView.isTracking)
-//    {
-//        if (scrollView.zoomScale == scrollView.minimumZoomScale)
-//        {
-//            _onDismiss();
-//        }
-//    }
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
@@ -211,6 +205,21 @@ CGFloat const minimumBackgroundAlpha = .2f;
         [self addGestureRecognizer:_panGestureRecognizer];
     }else{
         [self removeGestureRecognizer:_panGestureRecognizer];
+    }
+}
+
+- (void)hideEverythingExceptImage
+{
+    _captionLabel.alpha = 0;
+    _backgroundView.alpha = 0;
+    
+    _imageView.contentMode = UIViewContentModeCenter;
+    _imageView.clipsToBounds = YES;
+    
+    if (_imageView.image.size.width > _imageView.image.size.height) {
+        _imageView.frame = CGRectMake(_imageView.frame.origin.x + (_imageView.frame.size.width - _imageView.frame.size.height) / 2, _imageView.frame.origin.y, _imageView.frame.size.height, _imageView.frame.size.height);
+    }else{
+        _imageView.frame = CGRectMake(_imageView.frame.origin.x, _imageView.frame.origin.y + (_imageView.frame.size.height - _imageView.frame.size.width) / 2, _imageView.frame.size.width, _imageView.frame.size.width);
     }
 }
 
