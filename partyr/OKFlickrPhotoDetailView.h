@@ -24,4 +24,6 @@
 
 @property (copy, nonatomic) void (^onDismiss)(void);
 
+- (void)hideEverythingExceptImage;
+
 @end
